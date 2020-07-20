@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    triggers {
+        upstream(upstreamProjects: "pipeline-1/" + env.BRANCH_NAME.replaceAll("/", "%2F"), threshold: hudson.model.Result.FAILURE)
+    }
+
     stages {
         stage ('Compile Stage') {
 
